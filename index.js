@@ -1,8 +1,6 @@
 var url = "https://akicursosapi.herokuapp.com/api/cursos";
-var urlSalvar = "https://akicursosapi.herokuapp.com/api/curso/save";
 var listaCursos = [];
 var api = document.getElementById('api');
-var ajax = new XMLHttpRequest();
 
 var formNome = document.getElementById('inputNome');
 var formDescricao = document.getElementById('inputDescricao');
@@ -38,10 +36,6 @@ function adicionarCurso() {
         url: 'https://akicursosapi.herokuapp.com/api/curso/save',
         dataType: "json",
         data: dadosJson,
-        sucess: function (data) {
-            alert('Sucess');
-            console.log('success')
-        },
     });
 
     mostrarAlert();
