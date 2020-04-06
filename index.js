@@ -7,6 +7,7 @@ var formDescricao = document.getElementById('inputDescricao');
 var formUrlImagem = document.getElementById('inputUrlImagem');
 var formUrlCurso = document.getElementById('inputUrlCurso');
 var formCategoria = document.getElementById('inputCategoria');
+var curso;
 
 function main() {
     requestApi().then(res => mostrarCursos(res));
@@ -37,7 +38,20 @@ function adicionarCurso() {
         data: dadosJson,
     });
 
-    mostrarAlert();
+    mostrarAlert("Curso cadastrado com sucesso!");
+
+}
+
+function mostrarCursoPorId(id) {
+
+    $.ajax({
+        type: "GET",
+        url: `https://akicursosapi.herokuapp.com/api/curso/id/${id}`,
+        dataType: "json",
+        success: function(data) {
+            curso = data;
+        }        
+    });
 
 }
 
@@ -49,17 +63,12 @@ function excluirCurso(id) {
         dataType: "json",
     });
 
-    mostrarAlertExcluido();
+    mostrarAlert("Curso excluido com sucesso!");
 
 }
 
-function mostrarAlert() {
-    alert("Curso cadastrado com sucesso!");
-    window.location.reload();
-}
-
-function mostrarAlertExcluido() {
-    alert("Curso excluido com sucesso!");
+function mostrarAlert(texto) {
+    alert(texto);
     window.location.reload();
 }
 
@@ -76,7 +85,7 @@ async function mostrarCursos(res) {
                     <span class="mb-2 ml-2">${res[i].categoria}</span>
                 </div> 
                 <div class="col-md-3 text-right">
-                    <button type="button" class="btn btn-primary">Editar</button>
+                    <button type="button" class="btn btn-primary" onclick="mostrarCursoPorId(${res[i].idCurso})" data-target="#editar" data-toggle="modal">Editar</button>
                     <button type="button" class="btn btn-danger m-2" onclick="excluirCurso(${res[i].idCurso})">Excluir</button>  
                 </div>
             </div>    
@@ -91,8 +100,9 @@ async function mostrarCursos(res) {
 
 async function requestApi() {
     let response = await fetch(url);
-    response = await response.json();    
-    return response;    
+    response = await response.json();
+    $('#loader').hide();
+    return response;
 }
 
 main();

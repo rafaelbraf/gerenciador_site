@@ -82,6 +82,60 @@
             </div>
         </div>
 
+        <!-- Modal Editar -->
+        <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Editar curso</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form id="formularioAdicionar" method="GET">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Nome</label>
+                                <input type="text" class="form-control" id="inputNome">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Descrição</label>
+                                <textarea class="form-control" id="inputDescricao" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Url do Curso</label>
+                                <input type="text" class="form-control" id="inputUrlCurso">                                    
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Url da Imagem</label>
+                                <input type="text" class="form-control" id="inputUrlImagem">                                    
+                            </div>
+                            <select class="form-control" id="inputCategoria">
+                                <option>### Selecionar categoria ###</option>
+                                <option>Programação</option>
+                                <option>Games</option>
+                                <option>Saúde</option>
+                                <option>Investimentos</option>
+                                <option>Alimentação</option>
+                            </select>
+                            
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Sair</button>
+                        <button type="button" class="btn btn-success" onclick="adicionarCurso()">Adicionar</button>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="loader" class="text-center pt-5 mt-5">
+            <h3>Aguarde. Carregando cursos...</h3>
+        </div>
+
         <div id="api">
 
         </div>
