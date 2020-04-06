@@ -7,6 +7,13 @@ var formDescricao = document.getElementById('inputDescricao');
 var formUrlImagem = document.getElementById('inputUrlImagem');
 var formUrlCurso = document.getElementById('inputUrlCurso');
 var formCategoria = document.getElementById('inputCategoria');
+
+var nomeCurso = document.getElementById('nomeCurso');
+var categoriaCurso = document.getElementById('categoriaCurso');
+var descricaoCurso = document.getElementById('descricaoCurso');
+var url_curso = document.getElementById('urlCurso');
+var urlImagemCurso = document.getElementById('urlImagemCurso');
+
 var curso;
 
 function main() {
@@ -50,7 +57,12 @@ function mostrarCursoPorId(id) {
         dataType: "json",
         success: function(data) {
             curso = data;
-        }        
+            nomeCurso.innerHTML = "<strong>" + curso["nome"] + "</strong>";
+            categoriaCurso.innerHTML = curso["categoria"];
+            descricaoCurso.innerHTML = curso["descricao"];
+            url_curso.innerHTML = `<a href="${curso['urlCurso']}" target="blank">${curso["urlCurso"]}</a>`;
+            urlImagemCurso.innerHTML = `<a href="${curso['urlImagem']}" target="blank">${curso["urlImagem"]}</a>`;
+        }
     });
 
 }
@@ -85,7 +97,7 @@ async function mostrarCursos(res) {
                     <span class="mb-2 ml-2">${res[i].categoria}</span>
                 </div> 
                 <div class="col-md-3 text-right">
-                    <button type="button" class="btn btn-primary" onclick="mostrarCursoPorId(${res[i].idCurso})" data-target="#editar" data-toggle="modal">Editar</button>
+                    <button type="button" class="btn btn-primary" onclick="mostrarCursoPorId(${res[i].idCurso})" data-target="#editar" data-toggle="modal">Ver curso</button>
                     <button type="button" class="btn btn-danger m-2" onclick="excluirCurso(${res[i].idCurso})">Excluir</button>  
                 </div>
             </div>    
