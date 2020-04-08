@@ -69,13 +69,21 @@ function mostrarCursoPorId(id) {
 
 function excluirCurso(id) {
 
-    $.ajax({
-        type: "DELETE",
-        url: `https://akicursosapi.herokuapp.com/api/curso/delete/${id}`,
-        dataType: "json",
-    });
+    var resultado = confirm("Tem certeza que deseja excluir esse curso?");
+    
+    if(resultado == true) {
 
-    mostrarAlert("Curso excluido com sucesso!");
+        $.ajax({
+            type: "DELETE",
+            url: `https://akicursosapi.herokuapp.com/api/curso/delete/${id}`,
+            dataType: "json",
+        });
+    
+        mostrarAlert("Curso excluido com sucesso!");
+
+    } else {
+        return false;
+    }
 
 }
 
