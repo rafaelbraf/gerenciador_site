@@ -88,8 +88,18 @@ function excluirCurso(id) {
 }
 
 function mostrarAlert(texto) {
+
     alert(texto);
     window.location.reload();
+    
+}
+
+function limparCampos() {
+    formNome.value = "";
+    formDescricao.value = "";
+    formCategoria.value = "";
+    formUrlCurso.value = "";
+    formUrlImagem = "";    
 }
 
 async function mostrarCursos(res) {
