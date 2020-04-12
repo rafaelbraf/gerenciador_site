@@ -91,7 +91,8 @@ function mostrarAlert(texto) {
 
     alert(texto);
     window.location.reload();
-    
+    limparCampos();
+
 }
 
 function limparCampos() {
@@ -106,22 +107,25 @@ async function mostrarCursos(res) {
 
     let template = "";
 
-    for (var i in res) {
+    listaCursos = res.sort(function(a, b) {
+        return a.nome < b.nome ? -1 : a.nome > b.nome ? 1 : 0;
+    })    
+
+    for (var i in listaCursos) {
         template += `
         <div class="card mb-2">
             <div class="row">
                 <div class="col-md-9">
-                    <h5 class="mt-2 ml-2">${res[i].nome}</h5>
-                    <span class="mb-2 ml-2">${res[i].categoria}</span>
+                    <h5 class="mt-2 ml-2">${listaCursos[i].nome}</h5>
+                    <span class="mb-2 ml-2">${listaCursos[i].categoria}</span>
                 </div> 
                 <div class="col-md-3 text-right">
-                    <button type="button" class="btn btn-primary" onclick="mostrarCursoPorId(${res[i].idCurso})" data-target="#editar" data-toggle="modal">Ver curso</button>
-                    <button type="button" class="btn btn-danger m-2" onclick="excluirCurso(${res[i].idCurso})">Excluir</button>  
+                    <button type="button" class="btn btn-primary" onclick="mostrarCursoPorId(${listaCursos[i].idCurso})" data-target="#editar" data-toggle="modal">Ver curso</button>
+                    <button type="button" class="btn btn-danger m-2" onclick="excluirCurso(${listaCursos[i].idCurso})">Excluir</button>  
                 </div>
             </div>    
         </div>
         `;
-        console.log(res[i].nome);
     }
 
     api.innerHTML += template;
